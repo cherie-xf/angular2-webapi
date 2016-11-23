@@ -1,0 +1,35 @@
+<div class="user-content">
+
+<table>
+ <thead>
+ <tr>
+ <th *ngFor="let col of columns" >{{col.title}}</th>
+
+ </tr>
+
+ </thead>
+ <tbody>
+ <tr *ngFor="let row of rows">
+	<td>{{row.roleName}}</td>
+	<td *ngIf="row.roleName !== 'Admin'"><a (click)="delete(row.roleId)">Delete</a></td>
+
+ </tr>
+ </tbody>
+
+ </table>
+ <div class="user-detail" *ngIf="model.id">
+   <!--
+	<form name="form" (ngSubmit)="f.form.valid && addOrDelete()" #f="ngForm" novalidate>
+        <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !roleName.valid }">
+            <label for="firstName">Role Name</label>
+            <input type="text" class="form-control" name="firstName" [(ngModel)]="model.roleName" #firstName="ngModel" required />
+            <div *ngIf="f.submitted && !firstName.valid" class="help-block">Role Name is required</div>
+        <div class="form-group">
+            <button  class="btn btn-primary" *ngIf="ctrlFlag ==='add'">Add</button>
+			      <button  class="btn btn-primary" *ngIf="ctrlFlag ==='delete'">Delete</button>
+            <a (click)="cancel()" class="btn btn-link">Cancel</a>
+        </div>
+    </form>
+    -->
+ </div>
+</div>

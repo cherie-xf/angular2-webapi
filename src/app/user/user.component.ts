@@ -9,6 +9,7 @@ import { User } from '../_models/index';
 })
 export class UserComponent implements OnInit {
    model: any = {};
+  currentUser: User;
   ctrlFlag = '';
   public rows:Array<any> = [];
   users: User[] = [];
@@ -26,6 +27,7 @@ export class UserComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+	this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
 	this.onChangeTable();
   }
   
@@ -49,6 +51,7 @@ export class UserComponent implements OnInit {
                     // set success message and pass true paramater to persist the message after redirecting to the login page
                     this.alertService.success('Update successful', true);
                     this.model = {};
+	                  this.onChangeTable();
                 },
                 error => {
                     this.alertService.error(error);
@@ -61,6 +64,7 @@ export class UserComponent implements OnInit {
                     // set success message and pass true paramater to persist the message after redirecting to the login page
                     this.alertService.success('Delete successful', true);
                     this.model = {};
+	                  this.onChangeTable();
                 },
                 error => {
                     this.alertService.error(error);

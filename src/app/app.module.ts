@@ -24,6 +24,7 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { UserComponent } from './user/user.component';
 import { EventComponent } from './event/event.component';
+import { RoleComponent } from './role/role.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { EventComponent } from './event/event.component';
     RegisterComponent,
     UserComponent,
     EventComponent,
+    RoleComponent,
 
   ],
   imports: [
