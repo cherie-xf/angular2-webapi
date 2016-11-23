@@ -18,6 +18,7 @@ import { AlertComponent } from './_directives/alert/alert.component';
 import { AlertService} from './_services/alert.service';
 import { AuthenticationService } from './_services/authentication.service';
 import { UserService } from './_services/user.service';
+import { RoleService } from './_services/role.service';
 import { AuthGuard } from './_guards/auth.guard';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
@@ -51,6 +52,7 @@ import { RoleComponent } from './role/role.component';
 	AuthGuard,
 	AuthenticationService,
 	UserService,
+  RoleService,
 	
 	// providers used to create fake backend
      //   fakeBackendProvider,
