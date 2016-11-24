@@ -12,8 +12,8 @@ const appRoutes: Routes = [
     { path: '', component: HomeComponent, canActivate: [AuthGuard] },
     { path: 'login', component: LoginComponent },
     { path: 'register', component: RegisterComponent },
-    { path: 'user', component: UserComponent },
-    { path: 'role', component: RoleComponent },
+    { path: 'user', component: UserComponent, canActivate: [AuthGuard] },
+    { path: 'role', component: RoleComponent, canActivate: [AuthGuard] },
  
     // otherwise redirect to home
     { path: '**', redirectTo: '' }

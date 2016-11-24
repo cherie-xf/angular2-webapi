@@ -60,6 +60,9 @@ body {
   background-color: #221e1b;
   cursor: pointer;
 }
+.nav-item.active a {
+  background-color: #221e1b;
+}
 .nav-right span {
   margin-left: 20px;
 }
