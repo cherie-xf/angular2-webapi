@@ -13,7 +13,11 @@ export class LoginComponent implements OnInit {
   constructor(
     private router: Router,
     private authenticationService: AuthenticationService,
-    private alertService: AlertService) { }
+    private alertService: AlertService) {
+
+      authenticationService.logEvent$.subscribe(user => this.onLogEvent(user));
+
+    }
 
   ngOnInit() {
     // reset login status
@@ -26,12 +30,24 @@ export class LoginComponent implements OnInit {
 		this.authenticationService.login(this.model)
             .subscribe(
                 data => {
-                    this.router.navigate(['/']);
+                //this.router.navigate(['/']);
                 },
                 error => {
                     this.alertService.error(error);
                     this.loading = false;
                 });
     }
+
+  private onLogEvent(user : string):void {
+    if(user ){
+      if(user === 'error'){
+        this.alertService.error('current user not exist!');
+        this.loading = false;
+        }else {
+          this.router.navigate(['/']);
+        }
+    } else {
+    }
+  }
 
 }

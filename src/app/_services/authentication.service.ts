@@ -21,11 +21,13 @@ export class AuthenticationService {
                 // login successful if there's a jwt token in the response
                 let user = response.json();
                 //if (user && user.token) {
-				if(user){
+				    if(user){
                     // store user details and jwt token in local storage to keep user logged in between page refreshes
                     localStorage.setItem('currentUser', JSON.stringify(user));
                     this.logEvent$.emit(user);
-                }
+                    } else {
+                    this.logEvent$.emit('error');
+                    }
             });
     }
  
