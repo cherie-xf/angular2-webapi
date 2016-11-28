@@ -19,6 +19,8 @@ import { AlertService} from './_services/alert.service';
 import { AuthenticationService } from './_services/authentication.service';
 import { UserService } from './_services/user.service';
 import { RoleService } from './_services/role.service';
+import { ActivityService } from './_services/activity.service';
+import { EventService } from './_services/event.service';
 import { AuthGuard } from './_guards/auth.guard';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
@@ -26,6 +28,7 @@ import { RegisterComponent } from './register/register.component';
 import { UserComponent } from './user/user.component';
 import { EventComponent } from './event/event.component';
 import { RoleComponent } from './role/role.component';
+import { ActivityComponent } from './activity/activity.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +41,7 @@ import { RoleComponent } from './role/role.component';
     UserComponent,
     EventComponent,
     RoleComponent,
+    ActivityComponent,
 
   ],
   imports: [
@@ -53,6 +57,8 @@ import { RoleComponent } from './role/role.component';
 	AuthenticationService,
 	UserService,
   RoleService,
+  ActivityService,
+  EventService,
 	
 	// providers used to create fake backend
      //   fakeBackendProvider,

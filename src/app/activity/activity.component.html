@@ -1,0 +1,40 @@
+<div class="user-content">
+
+<table>
+ <thead>
+ <tr>
+ <th *ngFor="let col of columns" >{{col.title}}</th>
+
+ </tr>
+
+ </thead>
+ <tbody>
+ <tr *ngFor="let row of rows">
+	<td>{{row.activityDesc}}</td>
+	<td>{{row.createDate.split('T')[0]}}</td>
+	<td><a (click)="delete(row.activityId)">Delete</a></td>
+ </tr>
+ </tbody>
+
+ </table>
+ <button class="btn btn-primary btn-sm" (click)="create()">add new activity</button>
+ <div class="user-detail" *ngIf="ctrlFlag">
+	<form name="form" (ngSubmit)="f.form.valid && updateOrDelete()" #f="ngForm" novalidate>
+    <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !activityDesc.valid }">
+      <label for="activityDesc">Activey Description</label>
+      <input type="text" class="form-control" name="activityDesc" [(ngModel)]="model.activityDesc" #activityDesc="ngModel" required />
+      <div *ngIf="f.submitted && !activityDesc.valid" class="help-block">Activity Description is required</div>
+      <!--
+      <label for="createDate">Create Date</label>
+      <input type="date" [(ngModel)]="model.createDate" name="createDate" required/>
+      <div *ngIf="f.submitted && !createDate.valid" class="help-block">Create Date is required</div>
+      -->
+    </div>
+    <div class="form-group">
+      <button  class="btn btn-primary" *ngIf="ctrlFlag ==='create'">Create</button>
+      <button  class="btn btn-primary" *ngIf="ctrlFlag ==='delete'">Delete</button>
+      <a (click)="cancel()" class="btn btn-link">Cancel</a>
+    </div>
+  </form>
+ </div>
+</div>
