@@ -1,4 +1,9 @@
 <div class="user-content">
+ <div class="week-change">
+   <button class="btn btn-warning btn-sm" (click)="preweek()">previous week</button>
+   <button class="btn btn-primary btn-sm" (click)="curweek()">current week</button>
+   <button class="btn btn-success btn-sm" (click)="nextweek()">next week</button>
+ </div>
 <table>
  <thead>
  <tr>
@@ -8,14 +13,14 @@
 
  </thead>
  <tbody>
- <tr *ngFor="let row of rows">
-	<td>{{row.fromDate}}</td>
-	<td>{{row.toDate}}</td>
-	<td>{{row.activityDesc}}</td>
-	<td>{{row.userName}}</td>
-	<td>{{row.createDate.split('T')[0]}}</td>
-	<td><a (click)="edit(row.eventId)">Edit</a></td>
-	<td><a (click)="delete(row.eventId)">Delete</a></td>
+ <tr *ngFor="let event of events">
+	<td>{{event.fromDate}}</td>
+	<td>{{event.toDate}}</td>
+	<td>{{event.activityDesc}}</td>
+	<td>{{event.userName}}</td>
+	<td>{{event.createDate.split('T')[0]}}</td>
+	<td><a (click)="edit(event.eventId)">Edit</a></td>
+	<td><a (click)="delete(event.eventId)">Delete</a></td>
 
  </tr>
  </tbody>
