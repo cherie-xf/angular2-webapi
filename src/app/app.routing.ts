@@ -10,7 +10,7 @@ import { EventComponent } from './event/index';
 import { AuthGuard } from './_guards/auth.guard';
  
 const appRoutes: Routes = [
-    { path: '', component: HomeComponent, canActivate: [AuthGuard] },
+    { path: '', component: EventComponent, canActivate: [AuthGuard] },
     { path: 'login', component: LoginComponent },
     { path: 'register', component: RegisterComponent },
     { path: 'user', component: UserComponent, canActivate: [AuthGuard] },
@@ -18,7 +18,7 @@ const appRoutes: Routes = [
     { path: 'activity', component: ActivityComponent, canActivate: [AuthGuard] },
     { path: 'event', component: EventComponent, canActivate: [AuthGuard] },
  
-    // otherwise redirect to home
+    // otherwise redirect to event
     { path: '**', redirectTo: '' }
 ];
  

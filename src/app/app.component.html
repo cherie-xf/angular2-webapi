@@ -4,10 +4,10 @@
     <div class="title"><span>ZenithSocity</span></div>
     <div class="nav-center">
        <div class="nav-item"></div>
-       <div class="nav-item" [routerLinkActive]="['active']"><a [routerLink]="['/event']">manage events</a></div>
-       <div class="nav-item" [routerLinkActive]="['active']"><a [routerLink]="['/activity']">manage activity</a></div>
-       <div class="nav-item" [routerLinkActive]="['active']"><a [routerLink]="['/user']">manage users</a></div>
-       <div class="nav-item" [routerLinkActive]="['active']"><a [routerLink]="['/role']">manage roles</a></div>
+       <div class="nav-item" [routerLinkActive]="['active']"><a [routerLink]="['/']">manage events</a></div>
+       <div class="nav-item" [routerLinkActive]="['active']"><a [routerLink]="['/activity']" *ngIf="currentUser && currentUser.roleName == 'Admin'">manage activity</a></div>
+       <div class="nav-item" [routerLinkActive]="['active']"><a [routerLink]="['/user']" *ngIf="currentUser && currentUser.roleName == 'Admin'">manage users</a></div>
+       <div class="nav-item" [routerLinkActive]="['active']"><a [routerLink]="['/role']" *ngIf="currentUser && currentUser.roleName == 'Admin'">manage roles</a></div>
     </div>
     <div class="nav-right">
       <div *ngIf="currentUser">

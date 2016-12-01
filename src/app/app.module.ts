@@ -4,6 +4,8 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
+import { MyDatePickerModule } from 'mydatepicker';
+import { Ng2DatetimePickerModule } from 'ng2-datetime-picker';
 
 // used to create fake backend
 import { fakeBackendProvider } from './_helpers/index';
@@ -49,6 +51,7 @@ import { ActivityComponent } from './activity/activity.component';
     FormsModule,
     HttpModule,
 	//custom
+	Ng2DatetimePickerModule,
 	routing
   ],
   providers: [

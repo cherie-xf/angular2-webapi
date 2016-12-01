@@ -4,7 +4,7 @@
    <button class="btn btn-primary btn-sm" (click)="curweek()">current week</button>
    <button class="btn btn-success btn-sm" (click)="nextweek()">next week</button>
  </div>
-<table>
+<table class="table">
  <thead>
  <tr>
  <th *ngFor="let col of columns" >{{col.title}}</th>
@@ -14,13 +14,13 @@
  </thead>
  <tbody>
  <tr *ngFor="let event of events">
-	<td>{{event.fromDate}}</td>
-	<td>{{event.toDate}}</td>
+	<td>{{event.fromDate.split('T').join(' ')}}</td>
+	<td>{{event.toDate.split('T').join(' ')}}</td>
 	<td>{{event.activityDesc}}</td>
 	<td>{{event.userName}}</td>
 	<td>{{event.createDate.split('T')[0]}}</td>
-	<td><a (click)="edit(event.eventId)">Edit</a></td>
-	<td><a (click)="delete(event.eventId)">Delete</a></td>
+	<td *ngIf="currentUser && currentUser.roleName == 'Admin'"><a (click)="edit(event.eventId)">Edit</a></td>
+	<td *ngIf="currentUser && currentUser.roleName == 'Admin'"><a (click)="delete(event.eventId)">Delete</a></td>
 
  </tr>
  </tbody>
@@ -31,14 +31,49 @@
 	<form name="form" (ngSubmit)="f.form.valid && updateOrDelete()" #f="ngForm" novalidate>
     <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !activityDesc.valid }">
       <label for="activityDesc">Activity</label>
-      <input type="text" class="form-control" name="activityDesc" [(ngModel)]="model.activityDesc" #activityDesc="ngModel" required />
+	  <select [(ngModel)]="model.activityDesc" name="activityDesc" class="form-control" #activityDesc="ngModel" required>
+        <option *ngFor="let activity of activities" [value]="activity.activityDesc">{{activity.activityDesc}}</option>
+        <option *ngIf="activities.length === 0" [value]="">loading ..please wait </option>
+      </select>
       <div *ngIf="f.submitted && !activityDesc.valid" class="help-block">Last Name is required</div>
     </div>
+	
     <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !username.valid }">
       <label for="username">Username</label>
-      <input type="text" class="form-control" name="username" [(ngModel)]="model.userName" #username="ngModel" required />
+	  <select [(ngModel)]="model.userName" name="username" class="form-control" #username="ngModel" required>
+        <option *ngFor="let user of users" [value]="user.userName">{{user.userName}}</option>
+        <option *ngIf="users.length === 0" [value]="">loading ..please wait </option>
+      </select>
       <div *ngIf="f.submitted && !username.valid" class="help-block">Username is required</div>
     </div>
+	<div class="form-group" [ngClass]="{ 'has-error': f.submitted && !username.valid }">
+		<label for="username">select begin date and time:</label>
+		<input 
+		[(ngModel)]="model.fromDate" ng2-datetime-picker
+      
+		year="2016"
+		month="12"
+		day="7"
+		hour="8"
+		minute='00'
+		close-on-select="false"
+		#fromDate="ngModel" required name="fromDate"/>
+		<div *ngIf="f.submitted && !fromDate.valid" class="help-block">Begin data and time is required</div>
+	</div>
+	<div class="form-group" [ngClass]="{ 'has-error': f.submitted && !username.valid }">
+	 <label for="username">select end date and time:</label>
+	 <input 
+      [(ngModel)]="model.toDate" ng2-datetime-picker
+      
+      year="2016"
+      month="12"
+      day="8"
+      hour="23"
+      minute='59'
+      close-on-select="false"
+	  #toDate="ngModel" required name="toDate"/>
+	  <div *ngIf="f.submitted && !toDate.valid" class="help-block">End data and time is required</div>
+	</div>
     <div class="form-group">
       <button  class="btn btn-primary" *ngIf="ctrlFlag ==='edit'">Update</button>
       <button  class="btn btn-primary" *ngIf="ctrlFlag ==='delete'">Delete</button>

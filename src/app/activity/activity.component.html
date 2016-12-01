@@ -1,6 +1,6 @@
 <div class="user-content">
 
-<table>
+<table class="table">
  <thead>
  <tr>
  <th *ngFor="let col of columns" >{{col.title}}</th>
@@ -21,7 +21,7 @@
  <div class="user-detail" *ngIf="ctrlFlag">
 	<form name="form" (ngSubmit)="f.form.valid && updateOrDelete()" #f="ngForm" novalidate>
     <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !activityDesc.valid }">
-      <label for="activityDesc">Activey Description</label>
+      <label for="activityDesc">Activiy Description</label>
       <input type="text" class="form-control" name="activityDesc" [(ngModel)]="model.activityDesc" #activityDesc="ngModel" required />
       <div *ngIf="f.submitted && !activityDesc.valid" class="help-block">Activity Description is required</div>
       <!--

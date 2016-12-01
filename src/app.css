@@ -68,7 +68,7 @@ body {
 }
 
 .user-content {
-	width: 800px;
+	width: 70%;
 	margin: 0 auto;
 }
 .user-detail {
@@ -85,5 +85,6 @@ table {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  margin-top: 20px;
 }
 

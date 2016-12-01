@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { EventService, ActivityService, AlertService } from '../_services/index';
-import { Event, Activity } from '../_models/index';
-import { MyDatePickerModule } from 'mydatepicker';
+import { EventService, ActivityService, AlertService, UserService } from '../_services/index';
+import { Event, Activity, User } from '../_models/index';
+
 
 @Component({
   selector: 'app-event',
@@ -12,7 +12,9 @@ export class EventComponent implements OnInit {
 
   model: any = {};
   ctrlFlag = '';
+  currentUser: User;
   public rows:Array<any> = [];
+  users: User[] = [];
   activities: Activity[] = [];
   events: Array<any> = [];
   currentWeek: Array<Date> = [];
@@ -23,20 +25,26 @@ export class EventComponent implements OnInit {
 	  {title: 'User Name', name: 'userName'},
 	  {title: 'Create Date', name: 'createDate'},
   ];
+  
 
   constructor(
 	  private alertService: AlertService,
+	  private userService: UserService,
 	  private activityService: ActivityService,
 	  private eventService: EventService,
   ) { }
 
   ngOnInit() {
+	
     this.currentWeek = this.getCurrentWeek(new Date());
     this.onChangeTable();
+	this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
+	
   }
 
   public onChangeTable() {
       this.events = [];
+	  this.userService.getAll().subscribe(users => { this.users = users; });
 	  this.activityService.getAll().subscribe(activities => { this.activities = activities; });
       this.eventService.getAll().subscribe(events => { this.rows = events;
         for (var i = 0; i < this.rows.length; i++) {
@@ -101,6 +109,7 @@ export class EventComponent implements OnInit {
                     this.alertService.error(error);
                 });
     } else if(this.ctrlFlag === 'create') {
+		this.model.createDate = new Date();
         this.eventService.create(this.model)
             .subscribe(
                 data => {
@@ -132,7 +141,7 @@ export class EventComponent implements OnInit {
     this.ctrlFlag = '';
   }
 
-  /*
+
   private getCurrentWeek(date: Date) {
       let now = date? new Date(date) : new Date(); 
       // set time to some convenient value 
@@ -146,7 +155,8 @@ export class EventComponent implements OnInit {
       // Return array of date objects 
       return [monday, sunday];
   }
-  */
+
+    /*
   private getCurrentWeek(date: Date) {
 
   let curr = date ||new Date; // get current date
@@ -158,6 +168,7 @@ export class EventComponent implements OnInit {
   return [firstday, lastday];
 
   }
+    */
   public preweek() {
     let newDate = new Date(this.currentWeek[0].getTime() - 86400000 * 7);
     this.currentWeek = this.getCurrentWeek(newDate);
